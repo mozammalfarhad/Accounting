@@ -1,0 +1,4 @@
+D:\Latest_11042017\ZenAccounting\Accounting.ViewModel\bin\Debug\Accounting.ViewModel.dll
+D:\Latest_11042017\ZenAccounting\Accounting.ViewModel\bin\Debug\Accounting.ViewModel.pdb
+D:\Latest_11042017\ZenAccounting\Accounting.ViewModel\obj\Debug\Accounting.ViewModel.dll
+D:\Latest_11042017\ZenAccounting\Accounting.ViewModel\obj\Debug\Accounting.ViewModel.pdb

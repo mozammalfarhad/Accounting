@@ -1,0 +1,27 @@
+﻿@model Accounting.ViewModel.AccHead
+
+<form id="frmAccHead">
+    <fieldset>
+        <legend></legend>
+        <input type="hidden" name="AccId" id="AccId" class="form-control" value="@Model.AccId" />
+        Class Name
+        <input type="text" name="AccOrder" id="AccOrder" class="form-control" value="@Model.AccOrder" />
+        <br />
+        <button type="button" id="btnSubmit" class="btn btn-primary" value="Update" onclick="UpdateAccHead()">Update</button>
+    </fieldset>
+</form>
+
+<script type="text/javascript">
+    function UpdateAccHead() {
+        var accHeadDetails = $("#frmAccHead").serialize();
+        $.post("/AccHead/Edit", accHeadDetails, function (data) {
+            if (data == 0) {
+                location = location.href;
+            }
+            else {
+                window.location.replace("/AccHead");
+                window.location.reload(true);
+            }
+        })
+    }
+</script>

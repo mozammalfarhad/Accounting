@@ -1,0 +1,44 @@
+﻿@model IEnumerable<CtgBarAssociation.ViewModel.User>
+
+@{
+    ViewBag.Title = "User List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content">
+    <div class="page-bar">
+        <h2 class="page-title">User List</h2>
+    </div>
+    <br />
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>Mobile</th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>@Html.DisplayFor(modelItem=>item.Mobile)</td>
+                <td>
+                @Html.ActionLink("Edit", "UserEdit", new { id = item.userId }, new { @class="btn btn-sm purple" })
+                
+            </tr>
+        }
+
+    </table>
+</div>
+    
+

@@ -1,0 +1,12 @@
+D:\Latest_11042017\ZenAccounting\Accounting.BLL\obj\Debug\Accounting.BLL.csprojResolveAssemblyReference.cache
+D:\Latest_11042017\ZenAccounting\Accounting.BLL\bin\Debug\Accounting.BLL.dll
+D:\Latest_11042017\ZenAccounting\Accounting.BLL\bin\Debug\Accounting.BLL.pdb
+D:\Latest_11042017\ZenAccounting\Accounting.BLL\bin\Debug\Accounting.DAL.dll
+D:\Latest_11042017\ZenAccounting\Accounting.BLL\bin\Debug\Accounting.ViewModel.dll
+D:\Latest_11042017\ZenAccounting\Accounting.BLL\bin\Debug\VIT.DataLogicLayer.dll
+D:\Latest_11042017\ZenAccounting\Accounting.BLL\bin\Debug\Accounting.DAL.pdb
+D:\Latest_11042017\ZenAccounting\Accounting.BLL\bin\Debug\Accounting.ViewModel.pdb
+D:\Latest_11042017\ZenAccounting\Accounting.BLL\obj\Debug\Accounting.BLL.dll
+D:\Latest_11042017\ZenAccounting\Accounting.BLL\obj\Debug\Accounting.BLL.pdb
+D:\Latest_11042017\ZenAccounting\Accounting.BLL\bin\Debug\Accounting.IDAL.dll
+D:\Latest_11042017\ZenAccounting\Accounting.BLL\bin\Debug\Accounting.IDAL.pdb

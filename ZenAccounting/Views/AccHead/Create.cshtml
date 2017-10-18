@@ -1,0 +1,74 @@
+﻿
+<form id="frmAccHead">
+    <fieldset>
+        <legend>Account Head Details</legend>
+        Acc Code
+        <input type="text" name="AccCode" id="AccCode" class="form-control" />
+        AccType
+        <label for="AccType">Acc Type</label>
+        <select id="AccType" name="AccType" class="form-control"></select>
+        Parent
+        <input type="text" name="Parent" id="Parent" class="form-control" />
+        TopParent
+        <input type="text" name="TopParent" id="TopParent" class="form-control" />
+        Name
+        <input type="text" name="Name" id="Name" class="form-control" />
+        <label for="category">Category</label>
+        <select id="category" name="category" class="form-control"></select>
+        <label for="subcategory">Sub Category</label>
+        <select id="subcategory" name="subcategory" class="form-control"></select>       
+        Depth
+        <input type="text" name="Depth" id="Depth" class="form-control" />
+        Address
+        <input type="text" name="Address" id="Address" class="form-control" />
+        BranchID
+        <input type="text" name="BranchID" id="BranchID" class="form-control" />
+        CostCentre
+        <input type="checkbox" name="CostCentre" id="CostCentre" class="checkbox" />
+        IsBank
+        <input type="checkbox" name="IsBank" id="IsBank" class="checkbox" />
+        LR
+        <input type="text" name="LR" id="LR" class="form-control" />
+        OpenDate
+        <input type="text" name="OpenDate" id="OpenDate" class="form-control" />
+        OpeningAmt
+        <input type="text" name="OpeningAmt" id="OpeningAmt" class="form-control" />
+        OpeningType
+        <input type="text" name="OpeningType" id="OpeningType" class="form-control" />
+        SetOrder
+        <input type="text" name="SetOrder" id="SetOrder" class="form-control" />
+        <br />
+        <button type="button" id="btnSubmit" class="btn btn-primary" value="Save" onclick="SaveAccHead()">Save</button>
+    </fieldset>
+</form>
+<script type="text/javascript">
+    function SaveAccHead() {
+        var accHeadDetails = $("#frmAccHead").serialize();
+        $.post("/AccHead/Create", accHeadDetails, function (data) {
+            if (data == 0) {
+                location = location.href;
+            }
+            else {
+                window.location.replace("/AccHead");
+            }
+        })
+    }
+    $(function () {
+        $.get("/AccHead/AccHeadList", function (data) {
+            var items = "<option>..........</option>";
+            $.each(data, function (i, category) {
+                items += "<option value='" + category.Category + "'>" + category.Category + "</option>";
+            })
+            $("#category").html(items);
+
+
+            var items2 = "<option>..........</option>";
+            $.each(data, function (i, subcategory) {
+                items2 += "<option value='" + subcategory.SubCategory + "'>" + subcategory.SubCategory + "</option>";
+            })
+            $("#subcategory").html(items2);
+        });
+    })
+</script>
+
+

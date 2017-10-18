@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "List";
+
+}
+
+<h2>List</h2>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<style type="text/css">
+    .table {
+        font-family: Vardana;
+        font-size: 15px;
+        font-weight: normal;
+        display: table;
+        border-collapse: collapse;
+        border: solid px #C5C5C5;
+    }
+
+        .table td, th {
+            border: 1px solid #C5C5C5;
+            padding: 3px 7px 2px;
+            background-color: #C5C5C5;
+            color: #ffffff;
+        }
+
+        .table td {
+            border: 1px solid #C5C5C5;
+            background-color: #C5C5C5;
+            color: #000000;
+            font-family: Vardana;
+        }
+</style>
+
+<table id="tblaccHeads" class="display" cellspacing="0" data-page-length='5'>
+    <thead>
+        <tr>
+            <th>AccCode</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>SubCategory</th>
+            <th>OpenDate</th>
+            <th>LR</th>
+            <th>Address</th>
+            <th>AccType</th>
+            <th>CostCentre</th>
+            <th>IsBank</th>
+
+        </tr>
+    </thead>
+</table>
+<div style="width:300;">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tblaccHeads').DataTable({
+                "searching": true,
+                "ordering": true,
+                "pagingType": "full_numbers",
+                "ajax": "http://localhost:3029/AccHead/AccHeadList",
+                "columns": [
+                    { "data": "AccCode" },
+                    { "data": "Name" },
+                    { "data": "Category" },
+                    { "data": "SubCategory" },
+                    { "data": "OpenDate" },
+                    { "data": "LR" },
+                    { "data": "Address" },
+                    { "data": "AccType" },
+                    { "data": "CostCentre" },
+                    { "data": "IsBank" }
+                ]
+            });
+        });
+    </script>
+</div> 

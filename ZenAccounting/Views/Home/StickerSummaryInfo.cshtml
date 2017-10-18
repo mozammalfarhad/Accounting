@@ -1,0 +1,177 @@
+﻿@model List<CtgBarAssociation.ViewModel.StikerSales>
+@{
+    ViewBag.Title = "SearchSticker";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+     int s = 0;
+     int c = 0;
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+
+<div class="page-content">
+    <div class="page-bar">
+        <h2 class="page-title">General Ledger</h2>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN SAMPLE FORM PORTLET-->
+            <div class="portlet light bordered">
+
+                <div class="portlet-body">
+
+                    <div class="form-horizontal">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="control-label">From Date</label>
+                                @Html.TextBox("fdate", null, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label">From Date</label>
+                                @Html.TextBox("tdate", null, new { @class = "form-control" })
+                            </div>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <div class="col-md-4">
+                                    <label class="control-label">User Name</label>
+                                    @Html.DropDownList("username", new SelectList(ViewBag.users, "Value", "Text"), "Select", new { @class = "form-control" })
+                                </div>
+                            }
+                        </div>
+                        <br />
+                        
+                        <div class="row">
+                            <div class="col-md-1"><button class="btn btn-success" id="btnsearch">Search</button></div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row" id="tb1">
+                        @if (Model.Count() > 0)
+                        {
+
+                           <button class="btn btn-primary pull-right" style="margin-right:15px;margin-bottom:4px"  id="btnprint">Print</button>
+
+                            <div class="col-md-12">
+                                <table class="table table-striped table-bordered" id="Table">
+                                    <thead>
+                                        <tr>
+                                            <th>Sl NO</th>
+                                            <th>Sticker Type</th>
+                                            <th>Creation Date</th>
+                                            <th>Total Sticker</th>
+                                            <th>Total Price</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tfoot hidden>
+                                        <tr>
+                                            <th>Sl NO</th>
+                                            <th>Sticker Type</th>
+                                            <th>Creation Date</th>
+                                            <th>Total Stiker</th>
+                                            <th>Total Price</th>
+                                        </tr>
+                                    </tfoot>
+
+                                    <tbody>
+                                        @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }))
+                                        {
+
+                                            <tr>
+                                                <td>@item.Index</td>
+                                                <td>@item.Data.StikerTypeName</td>
+                                                <td>@item.Data.CrDate.ToString("d MMMM yyyy")</td>
+                                                <td>@item.Data.totalstiker @{ c += item.Data.totalstiker;}</td>
+                                                <td>@item.Data.Price @{ s += item.Data.Price;}</td>
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                    <tr>
+
+                                        <td colspan="3" style="text-align:right">Total</td>
+                                        <td>@c</td>
+                                        <td>@s Taka</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        }
+
+                    </div>
+
+                    <div id="partial"></div>
+
+                </div>
+            </div>
+            <!-- END SAMPLE FORM PORTLET-->
+        </div>
+    </div>
+
+
+@section Scripts {
+    @*<script src="https://code.jquery.com/jquery-1.12.4.js"></script>*@
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+
+   <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"> </script>
+   <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"> </script>
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                $('#Table').DataTable();
+            });
+        </script>
+
+
+   
+    <script type="text/javascript">
+        $("#fdate,#tdate").datepicker(
+             {
+                 dateFormat: 'yy/mm/dd',
+                 changeMonth: true,
+                 changeYear: true,
+                 yearRange: "-60:+30",
+                 maxDate: '0'
+             });
+    </script>
+  
+    <script type="text/javascript">
+        $("#btnsearch").click(function () {
+            $('#partial').empty();
+            if ($("#searchtype").val() == '') {
+
+            }
+            else {
+
+                $.ajax({
+                    type: "Get",
+                    data: { fdate: $("#fdate").val(), tdate: $("#tdate").val(), username: $("#username").val() },
+                    url: '@Url.Action("StickerSummaryInfoList", "Home")',
+                    success: function (result) {
+                        $("#tb1").hide();
+                        $('#partial').html(result);
+                    }
+                });
+            }
+        });
+    </script>
+<script type="text/javascript">
+    $("#btnprint").click(function () {
+ 
+            var url = '/Home/StikerDetailsReport/?';
+            window.open(url, '_blank');
+        
+    });
+</script>
+
+@*<script type="text/javascript" language="javascript">
+    var jq = jQuery.noConflict();
+</script>*@
+
+
+
+}
+
+

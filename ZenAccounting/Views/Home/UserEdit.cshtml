@@ -1,0 +1,78 @@
+﻿@model CtgBarAssociation.ViewModel.User
+
+@{
+    ViewBag.Title = "UserEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content">
+    <div class="page-bar">
+        <h2 class="page-title">Edit User</h2>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box green">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Edit From
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @using (Html.BeginForm())
+                    {
+                        <div class="form-body">
+                            <div class="form-horizontal">
+                              
+                                @Html.ValidationSummary(true)
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-3" })
+                                    <div class="col-md-5">
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Name)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Mobile, new { @class = "control-label col-md-3" })
+                                    <div class="col-md-5">
+                                        @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Mobile)
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        @Html.HiddenFor(m=>m.userId)
+                        @Html.HiddenFor(m=>m.username)
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn green">Update</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

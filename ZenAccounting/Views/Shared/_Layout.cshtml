@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - CDBA</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+
+    @Styles.Render("~/Content/mandatory/css")
+    @Styles.Render("~/Content/global/css")
+    @Styles.Render("~/Content/layout/css")
+    <link href="~/images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+
+    <div class="page-wrapper">
+        <!-- BEGIN HEADER -->
+        <div class="page-header navbar navbar-fixed-top">
+            <!-- BEGIN HEADER INNER -->
+            <div class="page-header-inner ">
+                <!-- BEGIN LOGO -->
+                <div class="page-logo">
+                    <a href="@Url.Action("StickerGenerate", "Home")">
+                        <img src="@Url.Content("~/Content/")assets/layouts/layout/img/cdba-logo.png" alt="logo" class="logo-default" />
+                    </a>
+                    <div class="menu-toggler sidebar-toggler">
+                        <span></span>
+                    </div>
+                </div>
+                <!-- END LOGO -->
+                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span></span>
+                </a>
+
+                <div class="top-menu">
+
+                    @Html.Partial("_LoginPartial")
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="clearfix"> </div>
+
+        <div class="page-container">
+            <!-- BEGIN SIDEBAR -->
+            <div class="page-sidebar-wrapper">
+
+                <div class="page-sidebar navbar-collapse collapse">
+
+                    <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+
+                        <li class="sidebar-toggler-wrapper hide">
+                            <div class="sidebar-toggler">
+                                <span></span>
+                            </div>
+                        </li>
+
+                        @if (Request.IsAuthenticated)
+                        {
+                            <li class="nav-item  ">
+                                <a href="@Url.Action("StickerGenerate", "Home")" class="nav-link nav-toggle">
+                                    <i class="icon-diamond"></i>
+                                    <span class="title">Vok. Generate</span>
+
+                                </a>
+
+                            </li>
+                            <li class="nav-item  ">
+                                <a href="@Url.Action("Bailbond", "Home")" class="nav-link nav-toggle">
+                                    <i class="icon-puzzle"></i>
+                                    <span class="title">Bailbond</span>
+
+                                </a>
+
+                            </li>
+                            <li class="nav-item  ">
+                                <a href="@Url.Action("SearchStiker", "Home")" class="nav-link nav-toggle">
+                                    <i class="icon-settings"></i>
+                                    <span class="title">Search Ledger</span>
+
+                                </a>
+
+                            </li>
+                            <li class="nav-item  ">
+                                <a href="@Url.Action("StickerSummary", "Home")" class="nav-link nav-toggle">
+                                    <i class="icon-bulb"></i>
+                                    <span class="title">Ledger Summery</span>
+
+                                </a>
+
+                            </li>
+                            <li class="nav-item  ">
+                                <a href="@Url.Action("StickerSummaryInfo", "Home")" class="nav-link nav-toggle">
+                                    <i class="icon-briefcase"></i>
+                                    <span class="title">General Ledger</span>
+
+                                </a>
+
+                            </li>
+                            if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item  ">
+                                    <a href="@Url.Action("Register", "Account")" class="nav-link nav-toggle">
+                                        <i class="icon-wallet"></i>
+                                        <span class="title">Register</span>
+
+                                    </a>
+
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="@Url.Action("UserList", "Home")" class="nav-link nav-toggle">
+                                        <i class="icon-user"></i>
+                                        <span class="title">User List</span>
+
+                                    </a>
+
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <!-- END SIDEBAR -->
+            </div>
+            <!-- END SIDEBAR -->
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <!-- BEGIN CONTENT BODY -->
+                @RenderBody()
+
+                <!-- END CONTENT BODY -->
+            </div>
+            <!-- END CONTENT -->
+
+        </div>
+        <!-- END CONTAINER -->
+        <!-- BEGIN FOOTER -->
+        <div class="page-footer">
+            <div class="page-footer-inner">
+                &copy; @DateTime.Now.Year - Chittagong District Bar Association
+
+            </div>
+            <div class="scroll-to-top">
+                <i class="icon-arrow-up"></i>
+            </div>
+        </div>
+        <!-- END FOOTER -->
+    </div>
+
+    <!--[if lt IE 9]>
+     @Scripts.Render("~/bundles/IEScript")
+     <![endif]-->
+    <script src="~/Scripts/jquery.js"></script>
+    @Scripts.Render("~/bundles/core/js")
+    @Scripts.Render("~/bundles/global/js")
+    @Scripts.Render("~/bundles/layout/js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

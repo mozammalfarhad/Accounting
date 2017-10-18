@@ -1,0 +1,168 @@
+﻿
+@{
+    ViewBag.Title = "StickerGenerate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<div class="page-content">
+    <div class="page-bar">
+        <h2 class="page-title">Vokalatnama Sticker Generate</h2>
+    </div>
+    <br />
+    <div class="row ">
+        <div class="col-md-12">
+            <!-- BEGIN SAMPLE FORM PORTLET-->
+            <div class="portlet light bordered">
+               
+                <div class="portlet-body form">
+                    
+                    @using (Html.BeginForm("StickerGenerate", "Home", FormMethod.Post, new { @class = "form-inline" }))
+                    {
+                        <input type="hidden" id="stikertype" name='stikertype' value="@ViewBag.value" />
+                        <div class="form-group">
+                            <label  for="exampleInputEmail2">LIN Number</label>
+                            @Html.TextBox("linno", null, new { @class = "form-control", required = "required" })
+                           
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword2">Number Of Sticker</label>
+                            @Html.TextBox("SNo", null, new { @class = "form-control", onInput = "checkLength()", required = "required" })
+                        </div>
+                        @Html.Hidden("linn")
+                        <button type="submit" class="btn btn-success">Generate</button>
+                       
+                    }
+
+                    <div id="partial"></div>
+                </div>
+            </div>
+            <!-- END SAMPLE FORM PORTLET-->
+        </div>
+    </div>
+
+</div>
+
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        if ('@TempData["stikertype"]' != '') {
+            var id = '@TempData["stikertype"]';
+            var url = '/Home/StikerReport/'+ id;
+            window.open(url, '_blank');
+        }
+    })
+</script>
+
+    <script type="text/javascript">
+       function checkLength() {
+        var fieldVal = document.getElementById('SNo').value;
+        //Suppose u want 3 number of character
+        if (fieldVal <= 50) {
+           
+            return true;
+        }
+        else {
+            alert('choose number from 1-50');
+            var str = document.getElementById('SNo').value;
+            str = str.substring(0, str.length - 1);
+            document.getElementById('SNo').value = str;
+        }
+    }
+    </script>
+    <script type="text/javascript">
+       
+            $("#SNo").keydown(function (event) {
+
+                if (event.shiftKey == true) {
+                    event.preventDefault();
+                }
+
+                if ((event.keyCode >= 48 && event.keyCode <= 57) || 
+                    (event.keyCode >= 96 && event.keyCode <= 105) || 
+                    event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 ||
+                    event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+                } else {
+                    event.preventDefault();
+                }
+
+                if($(this).val().indexOf('.') !== -1 && event.keyCode == 190)
+                    event.preventDefault(); 
+                //if a decimal has been added, disable the "."-button
+
+            });
+      
+    </script>
+    <script type="text/javascript">
+
+
+            $("#linno").autocomplete({
+                autoFocus: true,
+                selectFirst: true,
+                source: function (request, response) {
+                   
+                    $.ajax({
+                        url: "/Home/getVokalatnama",
+                        type: "POST",
+                        dataType: "json",
+                        data: { name: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                $("#linn").val(item.LINo);
+                                return { label: item.LINo, value: item.LINo };
+
+                            }))
+                            $("#linno").val(item.LINo);
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+                
+            });
+        
+   
+    </script>
+    <script type="text/javascript">
+        $("#linno").change(function () {
+           
+            $('#partial').empty();
+            if ($("#linno option:selected").val() == '') {
+               
+            }
+            else {
+
+                $.ajax({
+                    type: "POST",
+                    data: { linno: $("#linno").val() },
+                    url: '@Url.Action("GetLayerDetails", "Home")',
+                    success: function (result) {
+                        $('#partial').html(result);
+                    }
+                });
+              
+
+            }
+
+            return false;
+
+
+        });
+    </script>
+
+<script type="text/javascript" language="javascript">
+    var jq = jQuery.noConflict();
+</script>
+
+    }
+
+

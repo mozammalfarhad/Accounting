@@ -1,0 +1,7 @@
+D:\Latest_11042017\ZenAccounting\Accounting.IDAL\bin\Debug\Accounting.IDAL.dll
+D:\Latest_11042017\ZenAccounting\Accounting.IDAL\bin\Debug\Accounting.IDAL.pdb
+D:\Latest_11042017\ZenAccounting\Accounting.IDAL\obj\Debug\Accounting.IDAL.dll
+D:\Latest_11042017\ZenAccounting\Accounting.IDAL\obj\Debug\Accounting.IDAL.pdb
+D:\Latest_11042017\ZenAccounting\Accounting.IDAL\bin\Debug\Accounting.ViewModel.dll
+D:\Latest_11042017\ZenAccounting\Accounting.IDAL\bin\Debug\Accounting.ViewModel.pdb
+D:\Latest_11042017\ZenAccounting\Accounting.IDAL\obj\Debug\Accounting.IDAL.csprojResolveAssemblyReference.cache

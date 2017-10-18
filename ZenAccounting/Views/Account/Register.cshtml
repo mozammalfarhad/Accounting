@@ -1,0 +1,93 @@
+﻿@model CtgBarAssociation.WebPages.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="page-content">
+    <div class="page-bar">
+        <h2 class="page-title">Register New User</h2>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box green">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Registration From
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                   @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                   {
+                        <div class="form-body">
+                            @Html.AntiForgeryToken()
+                            <div class="text-danger">@ViewBag.erormessage</div>
+                            @Html.ValidationSummary()
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Role</label>
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(m => m.Role, new SelectList(ViewBag.userrolelist, "Value", "Text"), "Select", new { @class = "form-control" })
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">UserName</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Full Name</label>
+                                <div class="col-md-4">
+                                   @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Mobile</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @minLength = "11", @maxLength = "11" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Email</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Password</label>
+                                <div class="col-md-4">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Confirm Password</label>
+                                <div class="col-md-4">
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn green">Submit</button>
+                                  
+                                </div>
+                            </div>
+                        </div>
+                   }
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

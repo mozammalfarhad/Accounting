@@ -1,0 +1,168 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Bootstrap -->
+@*<script src="Content/bootstrap/js/bootstrap.js"></script>
+    <script src="Content/bootstrap/js/bootstrap.min.js"></script>*@
+
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            $('#tblaccHeads').DataTable({
+                responsive: true,
+            });
+
+        });
+
+    </script>*@
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#tblaccHeads').DataTable();
+    });
+    $("#loadstatus").html("loading...........................");
+
+    debugger;
+    $.get("/AccHead/AccHeadList", null, BindData);
+    function BindData(accheads) {
+
+        debugger;
+        var tablename = $("#tblaccHeads");
+        tablename.append("<tbody>");
+        var tableData;
+        for (var i = 0; i < accheads.length; i++) {
+            tableData = "<tr>" +
+               "<td>" + accheads[i].AccCode + "</td>" +
+               //"<td>" + accheads[i].Parent + "</td>" +
+              // "<td>" + accheads[i].TopParent + "</td>" +
+               "<td>" + accheads[i].Name + "</td>" +
+               "<td>" + accheads[i].Category + "</td>" +
+               "<td>" + accheads[i].SubCategory + "</td>" +
+               //"<td>" + accheads[i].Depth + "</td>" +
+               "<td>" + ConvertJsonDateString(accheads[i].OpenDate) + "</td>" +
+               "<td>" + accheads[i].LR + "</td>" +
+               "<td>" + accheads[i].Address + "</td>" +
+               //"<td>" + accheads[i].AccOrder + "</td>" +
+               // "<td>" + accheads[i].BranchID + "</td>" +
+                 "<td>" + accheads[i].AccType + "</td>" +
+                  "<td>" + accheads[i].CostCentre + "</td>" +
+                   //"<td>" + accheads[i].SetOrder + "</td>" +
+                    "<td>" + accheads[i].IsBank + "</td>" +
+               "<td>" + "<a href='#' class='btn btn-danger' onclick='EditAccHead(" + accheads[i].AccId + ")'><span class='fa fa-edit'>Edit</span></a>" +
+               "<a href='#' class='btn btn-danger' onclick='DeleteAccHead(" + accheads[i].AccId + ")'><span class='fa fa-times'>Delete</span></a>" + "</td>" +
+
+               "</tr>";
+            debugger;
+           
+                tablename.append(tableData);
+            
+
+        }
+        tablename.append("</tbody>");
+        $("#loadstatus").html("");
+
+
+    }
+    function CreateAccHead() {
+        var div = $("#myModalContent");
+        div.load("/AccHead/Create");
+        $("#ModalTitle").html("Add New Account Head");
+        $("#myModalAccHead").modal();
+
+    }
+    function EditAccHead(ID) {
+        var div = $("#myModalContent");
+        div.load("/AccHead/Edit/" + ID);
+        $("#ModalTitle").html("Update Acc Head Details");
+        $("#myModalAccHead").modal();
+
+    }
+    function DeleteAccHead(ID) {
+        var classDetails = $("#frmAccHead").serialize();
+        $.get("/AccHead/Delete/" + ID, null, function (data) {
+            if (data == 0) {
+                location = location.href;
+            }
+            else {
+                window.location.replace("/AccHead");
+                window.location.reload(true);
+                //var tablename = $("#tblclasss");
+                //var tableData = "<tr>" +
+                //    "<td>" + data.ClassName + "</td>" +
+
+                //    "<td>" + "" + "</td>" +
+
+                //    "</tr>";
+                //tablename.append(tableData);
+                //$("#myModalClass").modal('hide');
+            }
+        }, 'json');
+    }
+
+    function ConvertJsonDateString(jsonDate) {
+        var shortDate = null;
+        if (jsonDate) {
+            var regex = /-?\d+/;
+            var matches = regex.exec(jsonDate);
+            var dt = new Date(parseInt(matches[0]));
+            var month = dt.getMonth() + 1;
+            var monthString = month > 9 ? month : '0' + month;
+            var day = dt.getDate();
+            var dayString = day > 9 ? day : '0' + day;
+            var year = dt.getFullYear();
+            shortDate = dayString + '/' + monthString + '/' + year;
+        }
+        return shortDate;
+    };
+</script>
+<div id="myModalAccHead" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="modal-title" id="ModalTitle">Add New Account Head</div>
+            </div>
+            <div id="myModalContent" class="modal-body"></div>
+        </div>
+    </div>
+
+</div>
+<div style="padding:40px;">
+    <button type="button" class="fa fa-plus btn btn-primary" data-target="#myModalAccHead" onclick="CreateAccHead()">Add New Account Head</button>
+    <br />
+
+    @*<button type="button" class="btn btn-primary" data-target="#myModalEmployee" onclick="CreateBank()">Add New Bank</button>*@<br />
+    <div class="panel panel-primary">
+        <div class="panel panel-heading">Account Head List</div>
+        <div class="panel panel-body">
+            <div id="loadstatus"></div>
+            <table id="tblaccHeads" width="100" class="table table-bordered table-striped table-hover table-responsive table-condensed" data-page-length='5'>
+                <thead>
+                    <tr>
+                        <th>AccCode</th>
+                        @*<th>P</th>
+                            <th>TP</th>*@
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>SubCategory</th>
+                        @*<th>Depth</th>*@
+                        <th>OpenDate</th>
+                        <th>LR</th>
+                        <th>Address</th>
+                        @* <th>AccOrder</th>*@
+                        @* <th>BranchID</th>*@
+                        <th>AccType</th>
+                        <th>CostCentre</th>
+                        @* <th>SetOrder</th>*@
+                        <th>IsBank</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+</div>

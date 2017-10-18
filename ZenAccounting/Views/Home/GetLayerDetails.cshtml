@@ -1,0 +1,90 @@
+﻿@model CtgBarAssociation.ViewModel.GetVokalatDetails
+@{
+    Layout = null;
+}
+
+<form class="form-horizontal" role="form">
+    <div class="form-body">
+        <h3 class="form-section">Lawyer Info</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Member Code:</label>
+                    <div class="col-md-9">
+                        <p class="form-control-static"> @Html.DisplayFor(x => x.CodeNo, new { @class = "form-control" }) </p>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Name:</label>
+                    <div class="col-md-9">
+                        <p class="form-control-static"> @Html.DisplayFor(x => x.MemberName, new { @class = "form-control" }) </p>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+        </div>
+        <!--/row-->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Mobile:</label>
+                    <div class="col-md-9">
+                        <p class="form-control-static"> @Html.DisplayFor(x => x.Mobile, new { @class = "form-control" }) </p>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Father Name:</label>
+                    <div class="col-md-9">
+                        <p class="form-control-static">@Html.DisplayFor(x => x.FatherName, new { @class = "form-control" }) </p>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+        </div>
+        <!--/row-->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Date of Birth:</label>
+                    <div class="col-md-9">
+                        <p class="form-control-static"> @Html.DisplayFor(x => x.DateOfBirth, "mm d YYYY", new { @class = "form-control" }) </p>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">LIN Number:</label>
+                    <div class="col-md-9">
+                        <p class="form-control-static"> @Html.DisplayFor(x => x.Bar_LIN, new { @class = "form-control" }) </p>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+        </div>
+        
+    </div>
+    
+</form>
+
+
+@*<div class="form-horizontal">
+    <div class="row">
+        <div class="col-md-2">Member Code</div><div class="col-md-2">@Html.DisplayFor(x => x.CodeNo, new { @class = "form-control" })</div> <div class="col-md-2">Name</div><div class="col-md-2">@Html.DisplayFor(x => x.MemberName, new { @class = "form-control" })</div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">Mobile</div><div class="col-md-2">@Html.DisplayFor(x => x.Mobile, new { @class = "form-control" })</div> <div class="col-md-2">Father Name</div><div class="col-md-2">@Html.DisplayFor(x => x.FatherName, new { @class = "form-control" })</div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">Date Of Birth</div><div class="col-md-2">@Html.DisplayFor(x => x.DateOfBirth, "mm d YYYY", new { @class = "form-control" })</div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">LIN Number</div><div class="col-md-2">@Html.DisplayFor(x => x.Bar_LIN, new { @class = "form-control" })</div>
+    </div>
+</div>*@
